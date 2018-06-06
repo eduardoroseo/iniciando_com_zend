@@ -24,4 +24,17 @@ class PostTable
     {
         return $this->tableGateway->select();
     }
+
+    public function save(Post $post)
+    {
+        $data = [
+            'title' => $post->title,
+            'content' => $post->content,
+        ];
+
+        if ((int) $post->id === 0){
+            $this->tableGateway->insert($data);
+            return;
+        }
+    }
 }
