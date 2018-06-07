@@ -58,4 +58,32 @@ class BlogController extends AbstractActionController
         $this->table->save($post);
         return $this->redirect()->toRoute('post');
     }
+
+    public function editAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+
+        if(!$id){
+            return $this->redirect()->toRoute('post');
+        }
+
+        try {
+            $post = $this->table->find($id);
+        } catch (\Exception $e){
+            return $this->redirect()->toRoute('post');
+        }
+
+        $form = new PostForm();
+        $form->bind($post);
+        $form->get('submit')->setAttribute('value', 'Edit Post');
+
+        $request = $this->getRequest();
+
+        if(!$request->isPost()){
+            return [
+                'id' => $id,
+                'form' => $form
+            ];
+        }
+    }
 }
