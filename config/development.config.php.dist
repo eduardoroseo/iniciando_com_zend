@@ -8,6 +8,10 @@
 return [
     // Additional modules to include when in development mode
     'modules' => [
+        'Zend\Hydrator',
+        'Zend\InputFilter',
+        'Zend\Filter',
+        'Zend\I18n',
         'ZendDeveloperTools',
     ],
     // Configuration overrides during development mode
